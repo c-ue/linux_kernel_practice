@@ -1,0 +1,57 @@
+device type:
+1.character device
+    can only read in order
+        a.read()
+        b.write()
+        c.open()
+        d.close()
+    also can set seek
+        a.mmap()
+        b.lseek()
+2.block device
+    must read a least block(default 512 bytes in linux)
+3.network interface
+    as similar as queue(cat use read() and write())
+
+
+kernel module vs applicantion
+1.kernel module must be event-driven
+2.printk() like printf() not support float type
+3.kernel module's header must in /usr/src/linux
+4.kernel module run in kernel space, applicantion run in user space
+5.There are no float compute in kernel-space
+6.kernel module show in /proc/modules and /sys/module/*
+
+<linux/sched.h>
+struct task_struct current; =>  user-space caller information global variable
+current->pid;   =>  caller pid
+current->comm;  =>  caller command name
+
+<Example 1>
+makefile:
+1.module.c
+    obj-m := module.o
+2.file1.c file2.c
+    obj-m := module.o
+    module-objs := file1.o file2.o
+
+command line instruction:
+make -C /lib/modules/$(uname -r)/build/ M=$(pwd) modules
+
+<Example 2>
+makefile:
+ifneq ($(KERNELRELEASE), )
+    obj-m := hello.o
+
+else
+    KERNELDIR := /lib/modules/$(shell uname -r)/build/
+    PWD := $(shell pwd)
+
+default:
+    $(MAKE) -C $(KERNELDIR) M=$(PWD) modules
+clean:
+    rm *.o *.mod.c *.Mod *.mod *.ko
+endif
+
+
+p.26
