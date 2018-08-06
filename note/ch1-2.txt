@@ -53,5 +53,12 @@ clean:
     rm *.o *.mod.c *.Mod *.mod *.ko
 endif
 
+Linux Kernel Version information
+1./usr/src/linux-headers-$(uname -r)/include/generated/uapi/linux/version.h
+LINUX_VERSION_CODE  =>  Get linux kernel vesion int code
+KERNEL_VERSION  =>  Generate linux kernel version int code 
+2./usr/src/linux-headers-$(uname -r)/include/generated/utsrelease.h
+UTS_RELEASE =>  Get linux kernel version string
 
-p.26
+
+p.28

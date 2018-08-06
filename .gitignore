@@ -53,3 +53,6 @@ dkms.conf
 
 #microsoft vscode setting file
 .vscode/
+
+#tmp file
+review/

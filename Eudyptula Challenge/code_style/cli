@@ -1,0 +1,1 @@
+/home/ubuntu/Desktop/code_style/checkpatch.pl -file --no-tree --fix  [filename]
